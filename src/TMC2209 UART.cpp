@@ -7,14 +7,14 @@
 #define EN_PIN 2            // Activer - PURPLE
 #define DIR_PIN 3           // Direction - WHITE
 #define STEP_PIN 4          // Pas - ORANGE
-#define SW_SCK 5            // Horloge esclave logicielle (SCK) - BLUE
-#define SW_TX 6             // Code PIN de réception SoftwareSerial- BROWN
-#define SW_RX 7             // LogicielBroche de transmission série - YELLOW
+#define SW_SCK 5            // Horloge esclave logicielle (SCK)
+#define SW_TX 6             // Réception SoftwareSerial
+#define SW_RX 7             // LogicielBroche de transmission série
 #define DRIVER_ADDRESS 0b00 // TMC2209 Adresse du driver selon MS1 et MS2
 #define R_SENSE 0.11f       // La série SilentStepStick utilise 0.11... tout comme mon fysetc TMC2209 (?)
 
-SoftwareSerial SoftSerial(SW_RX, SW_TX);    // Assurez-vous de connecter RX à TX et TX à RX entre les deux appareils
-                                            // fonctionne avec TX uniquement connecté
+SoftwareSerial SoftSerial(SW_RX, SW_TX);                        // Assurez-vous de connecter RX à TX et TX à RX entre les deux appareils
+                                                                // fonctionne avec TX uniquement connecté
 TMC2209Stepper TMCdriver(&SoftSerial, R_SENSE, DRIVER_ADDRESS); // Création du driver TMC
 
 int accel;
@@ -39,7 +39,7 @@ void setup()
   TMCdriver.begin();          // UART: Initialise SW UART (si sélectionné) avec un débit en bauds par défaut de 115200
   TMCdriver.toff(5);          // Active le pilote dans le logiciel
   TMCdriver.rms_current(500); // Régler le courant RMS du moteur
-  TMCdriver.microsteps(256);  // Définir des micropas
+  TMCdriver.microsteps(128);  // Définir des micropas
 
   TMCdriver.en_spreadCycle(false);
   TMCdriver.pwm_autoscale(true); // Nécessaire pour la furtivité
@@ -58,14 +58,14 @@ void loop()
   {                       // Accélérer jusqu'à maxSpeed
     TMCdriver.VACTUAL(i); // Régler la vitesse du moteur
     Serial << TMCdriver.VACTUAL() << endl;
-    delay(100);
+    delay(50);
   }
 
   for (long i = maxSpeed; i >= 0; i = i - accel)
   { // Réduire la vitesse à zéro
     TMCdriver.VACTUAL(i);
     Serial << TMCdriver.VACTUAL() << endl;
-    delay(100);
+    delay(50);
   }
 
   dir = !dir;           // DIRECTION INVERSE
