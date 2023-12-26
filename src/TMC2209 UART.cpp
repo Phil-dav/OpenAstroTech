@@ -27,9 +27,9 @@ bool dir = false;
 void setup()
 {
 
-  Serial.begin(11520);          // initialiser la série matérielle pour le débogage
-  SoftSerial.begin(11520);      // initialiser la série du logiciel pour le contrôle du moteur UART
-  TMCdriver.beginSerial(11520); // initialiser UART
+  Serial.begin(115200);          // initialiser la série matérielle pour le débogage
+  SoftSerial.begin(115200);      // initialiser la série du logiciel pour le contrôle du moteur UART
+  TMCdriver.beginSerial(115200); // initialiser UART
 
   pinMode(EN_PIN, OUTPUT); // Set pinmodes
   pinMode(STEP_PIN, OUTPUT);
