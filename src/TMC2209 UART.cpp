@@ -1,6 +1,6 @@
 // programme modifié par Phil Dav le 13/11/23
 #include <Arduino.h>
-#include <TMCStepper.h>     // TMCstepper - https://github.com/teemuatlut/TMCStepper
+#include <TMCStepper.h>     // TMCstepper - https://github.com/teemugit commitatlut/TMCStepper
 #include <SoftwareSerial.h> // Série logicielle pour l'UART à TMC2209 - https://www.arduino.cc/en/Reference/softwareSerial
 #include <Streaming.h>      // Pour la sortie de débogage série - https://www.arduino.cc/reference/en/libraries/streaming/
 
